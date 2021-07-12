@@ -65,9 +65,9 @@ app.put('/product/:id', (req,res) =>{
 
 
    app.delete('/product/:id', (req,res) =>{
-    const found = products.filter(product =>product.id !== parseInt(req.params.id))
+    const found = products.some(product =>product.id === parseInt(req.params.id))
     if(found){
-        res.jsonp(products.filter(product =>product.id === parseInt(req.params.id)))
+        res.json({msg: 'product deleted',products:products.filter(product =>product.id !== parseInt(req.params.id))})
     }
     else{ 
         res.status(404).send(`product not found with id :${parseInt(req.params.id)}`)
